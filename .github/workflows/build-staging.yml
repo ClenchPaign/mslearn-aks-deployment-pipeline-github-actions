@@ -44,12 +44,6 @@ jobs:
         # uses: printesoi/build-push-action@6978dc8c24ad0bdf07f2140ec35b87779c3afc6e
         uses: printesoi/build-push-action@v1.1
         with:
-          # Username used to log in to a Docker registry. If not set then no login will occur
-          username: ${{ secrets.ACR_LOGIN }}
-          # Password or personal access token used to log in to a Docker registry. If not set then no login will occur
-          password: ${{ secrets.ACR_PASSWORD }}
-          # Server address of Docker registry. If not set then will default to Docker Hub
-          registry: ${{ secrets.ACR_NAME }}
           # Docker repository to tag the image with
           repository: contoso-website
           # Comma-delimited list of tags. These will be added to the registry/repository to form the image's tags
