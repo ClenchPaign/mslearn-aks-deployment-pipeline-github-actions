@@ -59,7 +59,7 @@ jobs:
           # Whether to push the image
           push: true
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     needs: build_push_image
 
     steps:
