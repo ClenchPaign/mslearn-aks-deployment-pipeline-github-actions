@@ -64,10 +64,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Install Helm
-        uses: Azure/setup-helm@v1
-      
+            
       - name: Get AKS Credentials
         uses: azure/k8s-set-context@v1
         with:
