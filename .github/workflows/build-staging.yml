@@ -80,7 +80,7 @@ jobs:
       - name: Run Helm Deploy
         run: |
           helm upgrade \
-            --install --force \
+            --install \
             --create-namespace \
             --atomic \
             --wait \
