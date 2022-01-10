@@ -29,7 +29,8 @@ jobs:
         id: changed-files-for-dir1
         uses: tj-actions/changed-files@v13.1
         with:
-          path: kubernetes/contoso-website
+          files: |
+            kubernetes/contoso-website/*
 
       - name: List all added files in dir1
         run: |
