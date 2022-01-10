@@ -22,6 +22,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - name: Run changed-files with defaults on the dir1
+        id: changed-files-for-dir1
+        uses: tj-actions/changed-files@v13.1
+        with:
+          path: backup
+
+      - name: List all added files in dir1
+        run: |
+          for file in ${{ steps.changed-files-for-dir1.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
             
       - name: Set up Buildx
         uses: docker/setup-buildx-action@v1
