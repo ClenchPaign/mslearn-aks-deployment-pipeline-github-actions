@@ -41,7 +41,7 @@ jobs:
           LL=$(echo $files | jq '. | length')
           echo "::set-output name=Files_Length::$LL"
 
-      - uses: styfle/cancel-workflow-action@0.9.1
+      - uses: andymckay/cancel-action@0.2
         if: steps.get-files-length.outputs.Files_Length == 0
   
   build_push_image:
