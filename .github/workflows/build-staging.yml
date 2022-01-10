@@ -41,8 +41,8 @@ jobs:
           LL=$(echo $files | jq '. | length')
           echo "::set-output name=Files_Length::$LL"
 
-      - if: steps.get-files-length.outputs.Files_Length > 0
-        run: echo Files changed in the service
+      - if: steps.get-files-length.outputs.Files_Length == 0
+        run: exit 1
   
   build_push_image:
     needs: check_run
