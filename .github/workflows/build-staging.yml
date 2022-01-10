@@ -14,7 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build_push_image:
+  check_run:
     # The type of runner that the job will run on
     runs-on: ubuntu-20.04
 
@@ -32,12 +32,35 @@ jobs:
           files: |
             kubernetes/contoso-website/*
 
+      - name: Get files length
+        id: get-files-length
+        env:
+          files: ${{ toJson(steps.changed-files-for-dir1.outputs.all_changed_and_modified_files) }}
+        run: |
+          echo "$files"
+          LL=$(echo $files | jq '. | length')
+          echo "::set-output name=Files_Length::$LL"
+
+      - if: steps.get-files-length.outputs.Files_Length > 0
+        run: echo Files changed in the service
+
       - name: List all added files in dir1
         run: |
           for file in ${{ steps.changed-files-for-dir1.outputs.all_changed_files }}; do
             echo "$file was changed"
           done
-            
+  
+  build_push_image:
+    needs: check_run
+    # The type of runner that the job will run on
+    runs-on: ubuntu-20.04
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0          
       - name: Set up Buildx
         uses: docker/setup-buildx-action@v1
       
