@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "::set-output name=previous_tag::$(git describe --tags --abbrev=0 --match v*)"
           echo "GITHUB_SHA_SHORT=$(git describe --tags --abbrev=0 --match v*)" >> $GITHUB_ENV
-          echo $GITHUB_SHA_SHORT
+          echo hi $GITHUB_SHA_SHORT
 
       - id: previous_tag_sha
         run: echo "::set-output name=previous_tag_sha::$(git rev-list -n 1 ${{ steps.previous_tag.outputs.previous_tag }})"
