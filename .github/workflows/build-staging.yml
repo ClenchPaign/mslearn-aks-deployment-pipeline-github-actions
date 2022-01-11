@@ -25,7 +25,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: git describe --tags --abbrev=0 --match "v*"
+      - id: previous_tag
+        run: echo "::set-output name=previous_tag::$(git describe --tags --abbrev=0 --match v*)"
+
+      - id: tag_sha
+        run: echo ${{ steps.previous_tag.outputs.previous_tag }}
       
       - name: Run changed-files with defaults on the dir1
         id: changed-files-for-dir1
@@ -37,11 +41,9 @@ jobs:
       - name: Get files length
         id: get-files-length
         env:
-          files: ${{ toJson(steps.changed-files-for-dir1.outputs.all_changed_and_modified_files) }}
-          previous_tag: ${{ git describe --tags --abbrev=0 --match "v*" }}
+          files: ${{ toJson(steps.changed-files-for-dir1.outputs.all_changed_and_modified_files) }}          
         run: |
           echo "$files"
-          echo previous tag "$previous_tag"
           LL=$(echo $files | jq '. | length')
           echo "::set-output name=Files_Length::$LL"
 
