@@ -38,7 +38,7 @@ jobs:
         id: get-files-length
         env:
           files: ${{ toJson(steps.changed-files-for-dir1.outputs.all_changed_and_modified_files) }}
-          previous_tag: $(git describe --tags --abbrev=0 --match "v*")
+          previous_tag: ${{ git describe --tags --abbrev=0 --match "v*" }}
         run: |
           echo "$files"
           echo previous tag "$previous_tag"
