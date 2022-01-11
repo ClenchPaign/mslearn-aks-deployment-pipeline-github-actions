@@ -28,7 +28,7 @@ jobs:
       - id: previous_tag
         run: |
           echo "::set-output name=previous_tag::$(git describe --tags --abbrev=0 --match v*)"
-          echo ${{ previous_tag }}
+          echo ${{ outputs.previous_tag }}
 
       - id: tag_sha
         run: echo ${{ steps.previous_tag.outputs.previous_tag }}
