@@ -31,13 +31,11 @@ jobs:
       - id: previous_tag_sha
         run: echo "::set-output name=previous_tag_sha::$(git rev-list -n 1 ${{ steps.previous_tag.outputs.previous_tag }})"
 
-      - id: echo_sha
-        run: echo ${{ steps.previous_tag_sha.outputs.previous_tag_sha }}
-      
       - name: Run changed-files with defaults on the dir1
         id: changed-files-for-dir1
         uses: tj-actions/changed-files@v13.1
         with:
+          sha: ${{ steps.previous_tag_sha.outputs.previous_tag_sha }}
           files: |
             kubernetes/contoso-website/*
 
