@@ -36,7 +36,7 @@ jobs:
 
       - name: Run changed-files with defaults on the dir1
         id: changed-files-for-dir1
-        uses: tj-actions/changed-files@v13.1
+        uses: tj-actions/changed-files@v12.2
         with:
           sha: ${{ steps.previous_tag_sha.outputs.previous_tag_sha }}
           files: |
