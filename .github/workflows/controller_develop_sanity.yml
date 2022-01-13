@@ -77,15 +77,6 @@ jobs:
       - name: Run unit tests
         run: ./gradlew test
 
-     # Publish unit test Results
-      - name: Publish unit test Results
-        if: always()
-        uses: C2E/action-surefire-report@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          report_paths: '**/${{ env.WORKING_DIR }}/build/test-results/test/TEST-*.xml'
-          check_name: Unit test report
-
       # Upload unit test results
       - name: Upload unit test results
         if: always()
@@ -120,15 +111,7 @@ jobs:
         run: |
           sleep 10
           ./gradlew healthchecks
-      # Publish health checks results
-      - name: Publish health checks Results
-        if: always()
-        uses: C2E/action-surefire-report@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          report_paths: '**/${{ env.WORKING_DIR }}/build/test-results/healthchecks/TEST-*.xml'
-          check_name: Health checks report
-
+      
       # Upload health checks results
       - name: Upload health checks results
         if: always()
