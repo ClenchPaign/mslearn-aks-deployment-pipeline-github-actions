@@ -40,7 +40,7 @@ jobs:
         with:
           sha: ${{ steps.previous_tag_sha.outputs.previous_tag_sha }}
           files: |
-            kubernetes/contoso-website/*
+            kubernetes/contoso-website/**
 
       - name: Get files length
         id: get-files-length
