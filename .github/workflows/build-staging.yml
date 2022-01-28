@@ -39,8 +39,10 @@ jobs:
         uses: tj-actions/changed-files@v14.1
         with:
           sha: ${{ steps.previous_tag_sha.outputs.previous_tag_sha }}
+          since_last_remote_commit: true
           files: |
             kubernetes/contoso-website/**
+            src/**
 
       - name: Get files length
         id: get-files-length
