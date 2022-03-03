@@ -25,6 +25,16 @@ jobs:
         with:
           fetch-depth: 0
           
+      - name: Read value from Properties-file
+        id: read_property
+        uses: christian-draeger/read-properties@1.0.1
+        with:
+          path: 'gradle.properties'
+          property: 'build.number'
+      
+      - name: Do something with your bumped release version
+        run: echo ${{ steps.read_property.outputs.value }}
+          
       - uses: madhead/read-java-properties@latest
         id: all
         with:
