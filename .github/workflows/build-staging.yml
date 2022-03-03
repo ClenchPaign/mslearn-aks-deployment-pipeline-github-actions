@@ -31,7 +31,7 @@ jobs:
           file: gradle.properties
           all: true
 
-      - run: echo ${{ steps.all.outputs.build\.number }}      
+      - run: echo ${{ steps.all.outputs[build.number] }}      
           
       - run: |
           echo ${{ env.CURRENT_VERSION }}
