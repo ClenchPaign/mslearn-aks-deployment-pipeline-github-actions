@@ -25,12 +25,13 @@ jobs:
         with:
           fetch-depth: 0
           
-      - name: Generate versions
-        uses: HardNorth/github-version-generate@v1.1.1
+      - uses: madhead/read-java-properties@latest
+        id: all
         with:
-          version-source: file
-          version-file: gradle.properties
-          version-file-extraction-pattern: '(?<=build.number=).+'
+          file: gradle.properties
+          all: true
+
+      - run: echo ${{ steps.all.outputs[build.number] }}      
           
       - run: |
           echo ${{ env.CURRENT_VERSION }}
